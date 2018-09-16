@@ -1,23 +1,45 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AsyncStorage, TextInput } from 'react-native';
 
 export default class App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state={
+      nome:''
+    };
+    this.setNome = this.setNome.bind(this);
+  }
+
+  setNome(nome){
+    let s = this.state;
+    s.nome = nome;
+    this.state(nome);
+
+    AsyncStorage.setItem('nome', nome);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <View style={styles.body}>
+        <TextInput style={styles.input} value={this.state.nome} onChangeText={(text)=> this.setNome(text)} />
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  body: {
+    paddingTop:25,
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent:'center',
+    alignItems:'center'
   },
+  input:{
+    height:40,
+    width:200,
+    borderWidth:1,
+    borderColor:'#CCCCCC',
+    padding:10,
+    fontSize:16
+  }
 });
