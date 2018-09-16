@@ -7,13 +7,18 @@ export default class App extends React.Component {
     this.state={
       nome:''
     };
+
+    AsyncStorage.getItem('nome').then((value)=> {
+      this.setState({nome:value});
+    });
+
     this.setNome = this.setNome.bind(this);
   }
 
   setNome(nome){
     let s = this.state;
     s.nome = nome;
-    this.state(nome);
+    this.setState(s);
 
     AsyncStorage.setItem('nome', nome);
   }
