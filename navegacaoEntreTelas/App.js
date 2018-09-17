@@ -1,23 +1,55 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { View, Text, Button, TextInput } from 'react-native';
+import { createStackNavigator } from 'react-navigation'
 
-export default class App extends React.Component {
+class TelaInicial extends Component{
+  
+  static navigationOptions = ({navigation}) => ({
+    title:'Chat'
+  });
+
+  constructor(props){
+    super(props);
+    this.state ={nome:''};
+
+    this.conversar = this.conversar.bind(this);
+  }
+
+  conversar(){
+    this.props.navigation.navigate('Conversa', {
+      nome: this.state.nome
+    });
+  }
+  
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+      <View>
+        <Text>Vamos conversar?</Text>
+        <TextInput style={{height:40, borderWidth:1, borderColor:'#000000', width:200}} placeholder='Qual seu nome?' onChangeText={(nome)=> this.setState({nome})} />
+        <Button title='Conversar' onPress={this.conversar} />
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+class ConversationScreen extends Component{
+
+  static navigationOptions = ({navigation}) => ({
+    title: navigation.state.params.nome
+  });
+
+  render(){
+    return(
+      <View>
+        <Text>Tela de conversa com {this.props.navigation.state.params.nome}</Text>
+      </View>
+    );
+  }
+}
+
+const Navegador = createStackNavigator({
+  Home: { screen: TelaInicial },
+  Conversa: { screen: ConversationScreen }
 });
+
+export default Navegador;
