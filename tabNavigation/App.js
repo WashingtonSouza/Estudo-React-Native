@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { createStackNavigator } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation';
 
 import TelaInicial from './src/TelaInicial';
 import ConversationScreen from './src/ConversationScreen';
 
-const Navegador = createStackNavigator({
+const Navegador = createBottomTabNavigator({
   Home: { screen: TelaInicial },
   Conversa: { screen: ConversationScreen }
 });

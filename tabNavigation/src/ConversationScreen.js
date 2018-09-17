@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Image } from 'react-native';
 
 export default class ConversationScreen extends Component{
 
     static navigationOptions = ({navigation}) => ({
-      title: navigation.state.params.nome
+        tabBarLabel:'Inicial',
+        tabBarLabel:'Inicial',
+      tabBarIcon:({tintColor, focused})=>{        
+        if(focused){
+          return(
+            <Image source={require('../assets/images/chat_on.png')} style={{width:26, height:26}} />
+          );
+        }
+        else{
+          return(
+            <Image source={require('../assets/images/chat_off.png')} style={{width:26, height:26}} />
+          );
+        }        
+      }
     });
-  
+
     render(){
-      return(
+        return(
         <View>
-          <Text>Tela de conversa com {this.props.navigation.state.params.nome}</Text>
+            <Text>Tela de conversa com </Text>
         </View>
-      );
+        );
     }
-  }
+}

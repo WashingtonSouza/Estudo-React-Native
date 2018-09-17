@@ -1,10 +1,22 @@
 import React, { Component } from 'react';
-import { View, Text, Button, TextInput } from 'react-native';
+import { View, Text, TextInput, Image } from 'react-native';
 
 export default class TelaInicial extends Component{
   
     static navigationOptions = ({navigation}) => ({
-      title:'Chat'
+      tabBarLabel:'Inicial',
+      tabBarIcon:({tintColor, focused})=>{        
+        if(focused){
+          return(
+            <Image source={require('../assets/images/home_on.png')} style={{width:26, height:26}} />
+          );
+        }
+        else{
+          return(
+            <Image source={require('../assets/images/home_off.png')} style={{width:26, height:26}} />
+          );
+        }        
+      }
     });
   
     constructor(props){
@@ -25,8 +37,10 @@ export default class TelaInicial extends Component{
         <View>
           <Text>Vamos conversar?</Text>
           <TextInput style={{height:40, borderWidth:1, borderColor:'#000000', width:200}} placeholder='Qual seu nome?' onChangeText={(nome)=> this.setState({nome})} />
-          <Button title='Conversar' onPress={this.conversar} />
+          
         </View>
       );
     }
   }
+
+//   <Button title='Conversar' onPress={this.conversar} />
